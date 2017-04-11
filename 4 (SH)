@@ -1,1 +1,35 @@
+csvpath = '...'                                                                                                         #cesta k csv
+f = open (csvpath, 'r', encoding='utf8')
+matice = []
+muzi = []                                                                                                               #parametr podle kterého se má třídit
+zeny = []
 
+for line in f:
+    line = line.rstrip()
+    values = line.split(',')
+    if values[1] == 'muž':
+        muzi.append(values)
+    if values[1] == 'žena':
+        zeny.append(values)
+
+f.close()
+
+def klic(radek):
+    return radek[1]                                                                                                     # 0 / 1 podle toho který sloupec je parametr
+
+muzi.sort(key=klic)
+zeny.sort(key=klic)
+
+muzicsv = open ('...', 'w+', encoding='utf8')                                                                           #vytvoření souboru s roztříděnou skupinou
+zenycsv = open ('...', 'w+', encoding='utf8')
+
+def ulozcsv(matice,cesta):
+    f = open (cesta, 'w+', encoding = 'utf8')
+    for line in matice:
+        f.write (','.join(line))
+        f.write('\n')
+
+f.close()
+
+ulozcsv(zeny, '...')
+ulozcsv(muzi, '...')
